@@ -1,7 +1,7 @@
-import { LoginForm } from '@/components/LoginForm'
+import { RobloxLoginPage } from '@/components/RobloxLoginPage'
 
 const Index = () => {
-  return <LoginForm />
+  return <RobloxLoginPage />
 };
 
 export default Index;

